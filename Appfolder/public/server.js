@@ -15,12 +15,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
+let notes = [];
+
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.get("/notes", function (req, res) {
   res.sendFile(path.join(__dirname, "/notes.html"));
+});
+
+app.get("/api/notes", function (req, res) {
+  res.json(notes);
+});
+
+app.post("/api/notes", function (req, res) {
+  console.log("request.body", req.body);
+  let newNotes = req.body;
+  notes.push(newNotes);
+  res.json(notes);
 });
 
 app.listen(PORT, function () {
