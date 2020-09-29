@@ -16,7 +16,10 @@ module.exports = function (app) {
     console.log(uniqueId);
     newNote.id = uniqueId;
     data.push(newNote);
-
+    fs.writeFileSync("./db/db.json", JSON.stringify(data), function (err) {
+      if (err) throw err;
+    });
+    fs.writeFileSync("./db/db.json", JSON.stringify(data));
     res.json(data);
   });
 
@@ -31,6 +34,10 @@ module.exports = function (app) {
       currentNote.id = newId.toString();
       newId++;
     }
+    fs.writeFileSync("./db/db.json", JSON.stringify(data), function (err) {
+      if (err) throw err;
+    });
+    fs.writeFileSync("./db/db.json", JSON.stringify(data));
     res.json(data);
   });
 };
